@@ -11,12 +11,11 @@ datasource db {
 }
 
 model User {
-  id          Int         @id @default(autoincrement())
-  phoneNumber String      @unique
-  name        String
+  id          Int        @id @default(autoincrement())
+  phoneNumber String     @unique
+  name        String?
   bio         String?
   userChat    UserChat[]
-  userGroup   UserGroup[]
   Message     Message[]
 }
 
@@ -35,20 +34,6 @@ model Chat {
   Message Message[]
 }
 
-model UserGroup {
-  id      Int   @id @default(autoincrement())
-  user    User  @relation(fields: [userId], references: [id])
-  group   Group @relation(fields: [groupId], references: [id])
-  userId  Int   @unique
-  groupId Int
-}
-
-model Group {
-  id        Int         @id @default(autoincrement())
-  userGroup UserGroup[]
-  Message   Message[]
-}
-
 model Message {
   id      Int    @id @default(autoincrement())
   type    String
@@ -60,9 +45,6 @@ model Message {
 
   user   User @relation(fields: [userId], references: [id])
   userId Int
-
-  group   Group @relation(fields: [groupId], references: [id])
-  groupId Int
 
   chat   Chat @relation(fields: [chatId], references: [id])
   chatId Int

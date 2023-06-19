@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { IndexService, IIndexService } from "../services/index.services";
+import { IndexService, IIndexService } from "../services/index.service";
 
 export interface IIndexController {
   index(req: Request, res: Response, next: NextFunction): void;
